@@ -1,15 +1,15 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 14
-    },
-    "auditLog": "/home/rakib/programming-hero/Level-2/Milestone-3/university-management-auth-service/logs/winston/.c47d3196c3e2dd4f1ccd17d67b5736ea01e1ed9c-audit.json",
-    "files": [
-        {
-            "date": 1686480147506,
-            "name": "/home/rakib/programming-hero/Level-2/Milestone-3/university-management-auth-service/logs/winston/ph-success-2023-11-06-16.log",
-            "hash": "c626cd7bffd01ad42b48b27d1a203138ea7ac73726f3c4455e2dd7c0bf1b4210"
-        }
-    ],
-    "hashType": "sha256"
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "/home/rakib/programming-hero/Level-2/Milestone-3/university-management-auth-service/logs/winston/.c47d3196c3e2dd4f1ccd17d67b5736ea01e1ed9c-audit.json",
+  "files": [
+    {
+      "date": 1686480147506,
+      "name": "/home/rakib/programming-hero/Level-2/Milestone-3/university-management-auth-service/logs/winston/ph-success-2023-11-06-16.log",
+      "hash": "c626cd7bffd01ad42b48b27d1a203138ea7ac73726f3c4455e2dd7c0bf1b4210"
+    }
+  ],
+  "hashType": "sha256"
 }
