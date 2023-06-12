@@ -27,6 +27,6 @@
     "es2021": true
   },
   "globals": {
-    "process": true
+    "process": "readonly"
   }
 }
