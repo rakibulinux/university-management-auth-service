@@ -9,7 +9,7 @@ const moduleRoutes: {
   route: Router;
 }[] = [
   {
-    path: '/users',
+    path: '/users/',
     route: UserRoutes,
   },
   {

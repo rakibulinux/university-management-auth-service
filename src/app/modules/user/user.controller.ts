@@ -7,6 +7,7 @@ import httpStatus from 'http-status';
 const createUser = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { user } = req.body;
+    console.log(user);
     const result = await UserService.createUser(user);
 
     sendResponse(res, {
