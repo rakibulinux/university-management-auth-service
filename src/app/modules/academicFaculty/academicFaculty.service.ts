@@ -43,31 +43,6 @@ const getAllFacultys = async (
     });
   }
 
-  // const andCondition = [
-  //   {
-  //     $or: [
-  //       {
-  //         title: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //         },
-  //       },
-  //       {
-  //         code: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //         },
-  //       },
-  //       {
-  //         year: {
-  //           $regex: searchTerm,
-  //           $options: 'i',
-  //         },
-  //       },
-  //     ],
-  //   },
-  // ];
-
   const { page, limit, skip, soryBy, sortOrder } =
     calculatePagination(paginationOptions);
 
