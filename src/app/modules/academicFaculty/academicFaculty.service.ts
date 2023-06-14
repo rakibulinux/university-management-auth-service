@@ -1,40 +1,32 @@
-import httpStatus from 'http-status';
-import ApiError from '../../../errors/ApiError';
 import {
-  academicSemesterSearchableFields,
-  academicSemesterTitleCodeMapper,
-} from './academicSemester.constant';
-import {
-  IAcademicSemester,
-  IAcademicSemesterFilters,
-} from './academicSemester.interface';
-import { AcademicSemester } from './academicSemester.model';
+  IAcademicFaculty,
+  IAcademicFacultyFilters,
+} from './academicFaculty.interface';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import { IGenericResponse } from '../../../interfaces/common';
 import calculatePagination from '../../helpers/paginationHelpers';
 import { SortOrder } from 'mongoose';
+import { AcademicFaculty } from './academicFaculty.model';
+import { academicFacultySearchableFields } from './academicFaculty.constant';
 
-const createSemister = async (
-  payload: IAcademicSemester
-): Promise<IAcademicSemester | null> => {
-  if (academicSemesterTitleCodeMapper[payload.title] !== payload.code) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid Semister Code');
-  }
-  const result = await AcademicSemester.create(payload);
+const createFaculty = async (
+  payload: IAcademicFaculty
+): Promise<IAcademicFaculty | null> => {
+  const result = await AcademicFaculty.create(payload);
   return result;
 };
 
-const getAllSemisters = async (
-  filters: IAcademicSemesterFilters,
+const getAllFacultys = async (
+  filters: IAcademicFacultyFilters,
   paginationOptions: IPaginationOptions
-): Promise<IGenericResponse<IAcademicSemester[]>> => {
+): Promise<IGenericResponse<IAcademicFaculty[]>> => {
   const { searchTerm, ...filtersData } = filters;
 
   const andCondition = [];
 
   if (searchTerm) {
     andCondition.push({
-      $or: academicSemesterSearchableFields.map(field => ({
+      $or: academicFacultySearchableFields.map(field => ({
         [field]: {
           $regex: searchTerm,
           $options: 'i',
@@ -86,11 +78,11 @@ const getAllSemisters = async (
 
   const whereCondition = andCondition.length > 0 ? { $and: andCondition } : {};
 
-  const result = await AcademicSemester.find(whereCondition)
+  const result = await AcademicFaculty.find(whereCondition)
     .sort(sortCondition)
     .skip(skip)
     .limit(limit);
-  const total = await AcademicSemester.countDocuments();
+  const total = await AcademicFaculty.countDocuments();
 
   return {
     meta: {
@@ -102,39 +94,32 @@ const getAllSemisters = async (
   };
 };
 
-const getSingleSemister = async (
+const getSingleFaculty = async (
   id: string
-): Promise<IAcademicSemester | null> => {
-  const result = await AcademicSemester.findById(id);
+): Promise<IAcademicFaculty | null> => {
+  const result = await AcademicFaculty.findById(id);
   return result;
 };
-const deleteSingleSemister = async (
+const deleteSingleFaculty = async (
   id: string
-): Promise<IAcademicSemester | null> => {
-  const result = await AcademicSemester.findByIdAndDelete(id);
+): Promise<IAcademicFaculty | null> => {
+  const result = await AcademicFaculty.findByIdAndDelete(id);
   return result;
 };
-const updateSemister = async (
+const updateFaculty = async (
   id: string,
-  payload: Partial<IAcademicSemester>
-): Promise<IAcademicSemester | null> => {
-  if (
-    payload.title &&
-    payload.code &&
-    academicSemesterTitleCodeMapper[payload.title] !== payload.code
-  ) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid Semister Code');
-  }
-  const result = await AcademicSemester.findOneAndUpdate({ _id: id }, payload, {
+  payload: Partial<IAcademicFaculty>
+): Promise<IAcademicFaculty | null> => {
+  const result = await AcademicFaculty.findOneAndUpdate({ _id: id }, payload, {
     new: true,
   });
   return result;
 };
 
-export const AcademicSemesterService = {
-  createSemister,
-  getAllSemisters,
-  getSingleSemister,
-  updateSemister,
-  deleteSingleSemister,
+export const AcademicFacultyService = {
+  createFaculty,
+  getAllFacultys,
+  getSingleFaculty,
+  updateFaculty,
+  deleteSingleFaculty,
 };
