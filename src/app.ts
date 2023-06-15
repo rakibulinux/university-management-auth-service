@@ -3,6 +3,10 @@ import cors from 'cors';
 import httpStatus from 'http-status';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routers from './app/routes';
+import {
+  findLastStudentId,
+  generatedStudentId,
+} from './app/modules/user/users.utils';
 // import ApiError from './errors/ApiError'
 
 const app: Application = express();
@@ -38,6 +42,18 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   });
   next();
 });
+
+const academicSemester = {
+  code: '01',
+  year: '2025',
+};
+
+const testId = async () => {
+  const studentId = await generatedStudentId(academicSemester);
+  console.log(studentId);
+};
+
+testId();
 
 // Global Error handler
 app.use(globalErrorHandler);
