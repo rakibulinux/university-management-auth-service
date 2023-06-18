@@ -3,11 +3,6 @@ import cors from 'cors';
 import httpStatus from 'http-status';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routers from './app/routes';
-import {
-  findLastStudentId,
-  generatedStudentId,
-} from './app/modules/user/users.utils';
-// import ApiError from './errors/ApiError'
 
 const app: Application = express();
 
@@ -17,15 +12,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Application route
-// app.use('/api/v1/users/', UserRoutes);
-// app.use('/api/v1/academic-semesters/', AcademicSemesterRoutes);
+
 app.use('/api/v1', routers);
 
 app.get('/', async (req: Request, res: Response) => {
-  res.send('Server is Working');
-  //   throw new Error('Testing error ')
-  //   throw new ApiError(400, 'Orabapre')
-  //   // next('Error got on Next')
+  res.send('API Server Is Working Fine');
 });
 
 //handle not found
@@ -42,18 +33,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   });
   next();
 });
-
-const academicSemester = {
-  code: '01',
-  year: '2025',
-};
-
-const testId = async () => {
-  const studentId = await generatedStudentId(academicSemester);
-  console.log(studentId);
-};
-
-testId();
 
 // Global Error handler
 app.use(globalErrorHandler);
