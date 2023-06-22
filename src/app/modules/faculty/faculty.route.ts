@@ -2,7 +2,7 @@ import express from 'express';
 // import validateRequest from '../../middlewares/validateRequest';
 import { FacultyController } from './faculty.controller';
 import validateRequest from '../../middlewares/validateRequest';
-import { FacultyValidation } from './student.validation';
+import { FacultyValidation } from './faculty.validation';
 
 const router = express.Router();
 
