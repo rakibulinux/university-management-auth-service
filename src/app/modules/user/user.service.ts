@@ -6,7 +6,7 @@ import {
   generatedAdminId,
   generatedFacultyId,
   generatedStudentId,
-} from './users.utils';
+} from './user.utils';
 import { IStudent } from '../student/student.interface';
 import { AcademicSemester } from '../academicSemester/academicSemester.model';
 import mongoose from 'mongoose';
@@ -16,15 +16,13 @@ import { IFaculty } from '../faculty/faculty.interface';
 import { Faculty } from '../faculty/faculty.model';
 import { Admin } from '../admin/admin.model';
 import { IAdmin } from '../admin/admin.interface';
-
 const createStudent = async (
   student: IStudent,
   user: IUser
 ): Promise<IUser | null> => {
   if (!user.password) {
-    user.password = config.default_user_pass as string;
+    user.password = config.default_student_pass as string;
   }
-
   user.role = 'student';
 
   const academicSemester = await AcademicSemester.findById(
@@ -87,9 +85,8 @@ const createFaculty = async (
   user: IUser
 ): Promise<IUser | null> => {
   if (!user.password) {
-    user.password = config.default_user_pass as string;
+    user.password = config.default_faculty_pass as string;
   }
-
   user.role = 'faculty';
 
   let newUserAllData = null;
@@ -145,7 +142,7 @@ const createAdmin = async (
   user: IUser
 ): Promise<IUser | null> => {
   if (!user.password) {
-    user.password = config.default_user_pass as string;
+    user.password = config.default_admin_pass as string;
   }
 
   user.role = 'admin';
@@ -159,13 +156,13 @@ const createAdmin = async (
     user.id = id;
     admin.id = id;
 
-    const newFaculty = await Admin.create([admin], { session });
+    const newAdmin = await Admin.create([admin], { session });
 
-    if (!newFaculty.length) {
-      throw new ApiError(httpStatus.BAD_REQUEST, 'Faculty create failed');
+    if (!newAdmin.length) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'Admin create failed');
     }
 
-    user.faculty = newFaculty[0]._id;
+    user.admin = newAdmin[0]._id;
 
     const newUser = await User.create([user], { session });
 

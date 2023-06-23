@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import { Schema, model } from 'mongoose';
-import { IUser, UserModel } from './user.interface';
+import { IUser, UserModel } from './auth.interface';
 import bcrype from 'bcrypt';
 import config from '../../../config';
 const userSchema = new Schema<IUser>(
@@ -17,7 +17,6 @@ const userSchema = new Schema<IUser>(
     password: {
       type: String,
       required: true,
-      select: 0,
     },
     student: {
       type: Schema.Types.ObjectId,
