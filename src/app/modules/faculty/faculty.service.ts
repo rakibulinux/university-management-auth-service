@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SortOrder } from 'mongoose';
+import mongoose, { SortOrder } from 'mongoose';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import calculatePagination from '../../helpers/paginationHelpers';
@@ -8,6 +8,7 @@ import { facultySearchableFields } from './faculty.constent';
 import { Faculty } from './faculty.model';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
+import { User } from '../user/user.model';
 
 const getAllFaculties = async (
   filters: IFacultyFilters,
@@ -47,6 +48,8 @@ const getAllFaculties = async (
   const whereCondition = andCondition.length > 0 ? { $and: andCondition } : {};
 
   const result = await Faculty.find(whereCondition)
+    .populate('academicDepartment')
+    .populate('academicFaculty')
     .sort(sortCondition)
     .skip(skip)
     .limit(limit);
@@ -63,13 +66,47 @@ const getAllFaculties = async (
 };
 
 const getSingleFaculty = async (id: string): Promise<IFaculty | null> => {
-  const result = await Faculty.findById(id);
+  const result = await Faculty.findOne({ id })
+    .populate('academicDepartment')
+    .populate('academicFaculty');
+  if (!result) {
+    throw new ApiError(
+      httpStatus.NOT_FOUND,
+      'Faculty ID is wrong or No Faculty Found'
+    );
+  }
   return result;
 };
+
 const deleteSingleFaculty = async (id: string): Promise<IFaculty | null> => {
-  const result = await Faculty.findByIdAndDelete(id);
-  return result;
+  // check if the faculty is exist
+  const isExist = await Faculty.findOne({ id });
+
+  if (!isExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Faculty not found !');
+  }
+
+  const session = await mongoose.startSession();
+
+  try {
+    session.startTransaction();
+    //delete student first
+    const student = await Faculty.findOneAndDelete({ id }, { session });
+    if (!student) {
+      throw new ApiError(404, 'Failed to delete faculty');
+    }
+    //delete user
+    await User.deleteOne({ id });
+    session.commitTransaction();
+    session.endSession();
+
+    return student;
+  } catch (error) {
+    session.abortTransaction();
+    throw error;
+  }
 };
+
 const updateFaculty = async (
   id: string,
   payload: Partial<IFaculty>

@@ -1,8 +1,14 @@
-import { Model } from 'mongoose';
-
 export type ILoginUser = {
   id: string;
   password: string;
 };
 
-export type LoginUserModel = Model<ILoginUser, Record<string, unknown>>;
+export type ILoginUserResponse = {
+  accessToken: string;
+  refreshToken?: string;
+  needsPasswordChanged: boolean;
+};
+
+export type IRefreshTokenResponse = {
+  accessToken: string;
+};

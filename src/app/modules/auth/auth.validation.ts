@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const createAuthZodSchema = z.object({
+const loginZodSchema = z.object({
   body: z.object({
     id: z.string({
       required_error: 'ID Is Required',
@@ -10,7 +10,15 @@ const createAuthZodSchema = z.object({
     }),
   }),
 });
+const refreshTokenZodSchema = z.object({
+  cookies: z.object({
+    refreshToken: z.string({
+      required_error: 'ID Is Required',
+    }),
+  }),
+});
 
 export const AuthValidation = {
-  createAuthZodSchema,
+  loginZodSchema,
+  refreshTokenZodSchema,
 };

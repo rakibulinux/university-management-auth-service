@@ -6,14 +6,14 @@ const router = express.Router();
 
 router.post(
   '/login',
-  validateRequest(AuthValidation.createAuthZodSchema),
+  validateRequest(AuthValidation.loginZodSchema),
   AuthController.loginUser
 );
-// router.post(
-//   '/create-faculty',
-//   validateRequest(AuthValidation.createFacultyZodSchema),
-//   AuthController.createFaculty
-// );
+router.post(
+  '/refresh-token',
+  validateRequest(AuthValidation.refreshTokenZodSchema),
+  AuthController.refreshToken
+);
 // router.post(
 //   '/create-admin',
 //   validateRequest(AuthValidation.createAdminZodSchema),

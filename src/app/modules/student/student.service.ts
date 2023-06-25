@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SortOrder } from 'mongoose';
+import mongoose, { SortOrder } from 'mongoose';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import calculatePagination from '../../helpers/paginationHelpers';
@@ -8,6 +8,7 @@ import { IStudent, IStudentFilters } from './student.interface';
 import { Student } from './student.model';
 import ApiError from '../../../errors/ApiError';
 import httpStatus from 'http-status';
+import { User } from '../user/user.model';
 
 const getAllStudents = async (
   filters: IStudentFilters,
@@ -66,18 +67,53 @@ const getAllStudents = async (
 };
 
 const getSingleStudent = async (id: string): Promise<IStudent | null> => {
-  const result = await Student.findById(id);
+  const result = await Student.findOne({ id })
+    .populate('academicSemester')
+    .populate('academicDepartment')
+    .populate('academicFaculty');
+  if (!result) {
+    throw new ApiError(
+      httpStatus.NOT_FOUND,
+      'Student ID is wrong or No Student Found'
+    );
+  }
   return result;
 };
+
 const deleteSingleStudent = async (id: string): Promise<IStudent | null> => {
-  const result = await Student.findByIdAndDelete(id);
-  return result;
+  // check if the faculty is exist
+  const isExist = await Student.findOne({ id });
+
+  if (!isExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Student not found !');
+  }
+
+  const session = await mongoose.startSession();
+
+  try {
+    session.startTransaction();
+    //delete student first
+    const student = await Student.findOneAndDelete({ id }, { session });
+    if (!student) {
+      throw new ApiError(404, 'Failed to delete student');
+    }
+    //delete user
+    await User.deleteOne({ id });
+    session.commitTransaction();
+    session.endSession();
+
+    return student;
+  } catch (error) {
+    session.abortTransaction();
+    throw error;
+  }
 };
+
 const updateStudent = async (
   id: string,
   payload: Partial<IStudent>
 ): Promise<IStudent | null> => {
-  const isExsist = await Student.findOne({ _id: id });
+  const isExsist = await Student.findOne({ id: id });
 
   if (!isExsist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Student Not found');
@@ -106,13 +142,9 @@ const updateStudent = async (
     });
   }
 
-  const result = await Student.findOneAndUpdate(
-    { _id: id },
-    updateStudentData,
-    {
-      new: true,
-    }
-  );
+  const result = await Student.findOneAndUpdate({ id }, updateStudentData, {
+    new: true,
+  });
   return result;
 };
 export const StudentService = {

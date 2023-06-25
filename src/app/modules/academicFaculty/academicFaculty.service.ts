@@ -9,14 +9,14 @@ import { SortOrder } from 'mongoose';
 import { AcademicFaculty } from './academicFaculty.model';
 import { academicFacultySearchableFields } from './academicFaculty.constant';
 
-const createFaculty = async (
+const createAcademicFaculty = async (
   payload: IAcademicFaculty
 ): Promise<IAcademicFaculty | null> => {
   const result = await AcademicFaculty.create(payload);
   return result;
 };
 
-const getAllFacultys = async (
+const getAllAcademicFaculties = async (
   filters: IAcademicFacultyFilters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<IAcademicFaculty[]>> => {
@@ -69,19 +69,19 @@ const getAllFacultys = async (
   };
 };
 
-const getSingleFaculty = async (
+const getSingleAcademicFaculty = async (
   id: string
 ): Promise<IAcademicFaculty | null> => {
   const result = await AcademicFaculty.findById(id);
   return result;
 };
-const deleteSingleFaculty = async (
+const deleteSingleAcademicFaculty = async (
   id: string
 ): Promise<IAcademicFaculty | null> => {
   const result = await AcademicFaculty.findByIdAndDelete(id);
   return result;
 };
-const updateFaculty = async (
+const updateAcademicFaculty = async (
   id: string,
   payload: Partial<IAcademicFaculty>
 ): Promise<IAcademicFaculty | null> => {
@@ -92,9 +92,9 @@ const updateFaculty = async (
 };
 
 export const AcademicFacultyService = {
-  createFaculty,
-  getAllFacultys,
-  getSingleFaculty,
-  updateFaculty,
-  deleteSingleFaculty,
+  createAcademicFaculty,
+  getAllAcademicFaculties,
+  getSingleAcademicFaculty,
+  updateAcademicFaculty,
+  deleteSingleAcademicFaculty,
 };
