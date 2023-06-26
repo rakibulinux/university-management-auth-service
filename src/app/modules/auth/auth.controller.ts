@@ -45,8 +45,21 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
       data: result,
     });
 });
+const changePassword = catchAsync(async (req: Request, res: Response) => {
+  const { ...passwordData } = req.body;
+  const user = req.user;
+  const result = await AuthService.changePassword(user, passwordData);
+
+  sendResponse<ILoginUserResponse>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User Login Successfully',
+    data: result,
+  });
+});
 
 export const AuthController = {
   loginUser,
   refreshToken,
+  changePassword,
 };
