@@ -23,7 +23,7 @@ const UserSchema = new Schema<IUser, UserModel>(
       type: Boolean,
       default: true,
     },
-    passwordChnagedAt: {
+    passwordChangedAt: {
       type: Date,
     },
     student: {
@@ -87,6 +87,9 @@ UserSchema.pre('save', async function (next) {
     user.password,
     Number(config.bcrypt_salt_rounds)
   );
+  if (!user.needsPasswordChanged) {
+    user.passwordChangedAt = new Date();
+  }
   next();
 });
 
