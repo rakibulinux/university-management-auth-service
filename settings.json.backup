@@ -1,0 +1,112 @@
+{
+  // editor
+  "editor.fontSize": 17,
+  "editor.fontFamily": "CaskaydiaCove NF Mono",
+  "editor.fontLigatures": true,
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "comment",
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }
+    ]
+  },
+  "git.autofetch": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "html.format.contentUnformatted": "",
+  "emmet.triggerExpansionOnTab": true,
+  "files.associations": {
+    "*html": "html"
+  },
+  "debug.javascript.debugByLinkOptions": "on",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "liveServer.settings.donotVerifyTags": true,
+  "tailwindCSS.emmetCompletions": true,
+  "tabnine.experimentalAutoImports": true,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "grammarly.files.include": [
+    "**/readme.md",
+    "**/README.md",
+    "**/*.txt",
+    "**/*.js",
+    "**/*.html",
+    "**/*.css",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.tslint": true,
+    "source.fixAll.jslint": true
+    // "source.organizeImports": true
+  },
+  "eslint.alwaysShowStatus": true,
+  // cursor
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorBlinking": "expand",
+  // "terminal.integrated.fontFamily": "monospace",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "inlineFold.maskColor": "#6bc3fa",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    },
+    "Ubuntu (WSL)": {
+      "path": "C:\\WINDOWS\\System32\\wsl.exe",
+      "args": ["-d", "Ubuntu"]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "rapidapi.terminalLink.enabled": true,
+  "terminal.integrated.autoReplies": {},
+  "terminal.integrated.fontSize": 15,
+  "terminal.integrated.fontWeight": "bold",
+  // "terminal.integrated.fontFamily": "monospace, MesloLGM NF"
+  "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font Mono",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "vs-kubernetes": {
+    "vscode-kubernetes.kubectl-path.linux": "/home/rakib/.local/state/vs-kubernetes/tools/kubectl/kubectl",
+    "vscode-kubernetes.minikube-path.linux": "/home/rakib/.local/state/vs-kubernetes/tools/minikube/linux-amd64/minikube",
+    "vscode-kubernetes.helm-path.linux": "/home/rakib/.local/state/vs-kubernetes/tools/helm/linux-amd64/helm"
+  },
+  "terminal.integrated.shellIntegration.suggestEnabled": true,
+  "workbench.colorTheme": "Default Dark+",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.iconTheme": "material-icon-theme"
+  // config related to code formatting
+}
