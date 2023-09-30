@@ -13,7 +13,7 @@ const getAllFaculties = catchAsync(async (req: Request, res: Response) => {
   const paginationOptions = pick(req.query, paginationField);
   const result = await FacultyService.getAllFaculties(
     filters,
-    paginationOptions
+    paginationOptions,
   );
 
   // next();

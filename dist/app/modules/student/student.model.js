@@ -139,6 +139,6 @@ exports.StudentSchema = new mongoose_1.Schema(
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 exports.Student = (0, mongoose_1.model)('Student', exports.StudentSchema);

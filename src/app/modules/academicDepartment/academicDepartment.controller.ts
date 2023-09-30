@@ -11,7 +11,7 @@ import { academicDepartmentFilterableFields } from './academicDepartment.constan
 const createDepartment = catchAsync(async (req: Request, res: Response) => {
   const { ...academicDepartmentData } = req.body;
   const result = await AcademicDepartmentService.createDepartment(
-    academicDepartmentData
+    academicDepartmentData,
   );
   // next();
   sendResponse<IAcademicDepartment>(res, {
@@ -27,7 +27,7 @@ const getAllDepartments = catchAsync(async (req: Request, res: Response) => {
   const paginationOptions = pick(req.query, paginationField);
   const result = await AcademicDepartmentService.getAllDepartments(
     filters,
-    paginationOptions
+    paginationOptions,
   );
   // next();
   sendResponse<IAcademicDepartment[]>(res, {
@@ -61,14 +61,14 @@ const deleteSingleDepartment = catchAsync(
       message: 'Department deleted Successfully',
       data: result,
     });
-  }
+  },
 );
 const updateDepartment = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
   const updatedData = req.body;
   const result = await AcademicDepartmentService.updateDepartment(
     id,
-    updatedData
+    updatedData,
   );
   sendResponse<IAcademicDepartment>(res, {
     statusCode: httpStatus.OK,

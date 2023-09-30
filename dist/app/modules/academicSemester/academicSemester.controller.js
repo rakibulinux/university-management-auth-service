@@ -68,7 +68,7 @@ const createSemester = (0, catchAsync_1.default)((req, res) =>
     const academicSemesterData = __rest(req.body, []);
     const result =
       yield academicSemester_service_1.AcademicSemesterService.createSemister(
-        academicSemesterData
+        academicSemesterData,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -77,22 +77,22 @@ const createSemester = (0, catchAsync_1.default)((req, res) =>
       message: 'Academic Semester is Created Successfully',
       data: result,
     });
-  })
+  }),
 );
 const getAllSemisters = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const filters = (0, pick_1.default)(
       req.query,
-      academicSemester_constant_1.academicSemesterFilterableFields
+      academicSemester_constant_1.academicSemesterFilterableFields,
     );
     const paginationOptions = (0, pick_1.default)(
       req.query,
-      pagination_1.paginationField
+      pagination_1.paginationField,
     );
     const result =
       yield academicSemester_service_1.AcademicSemesterService.getAllSemisters(
         filters,
-        paginationOptions
+        paginationOptions,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -102,14 +102,14 @@ const getAllSemisters = (0, catchAsync_1.default)((req, res) =>
       meta: result.meta,
       data: result.data,
     });
-  })
+  }),
 );
 const getSingleSemister = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     const result =
       yield academicSemester_service_1.AcademicSemesterService.getSingleSemister(
-        id
+        id,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -118,14 +118,14 @@ const getSingleSemister = (0, catchAsync_1.default)((req, res) =>
       message: 'Semester retrived Successfully',
       data: result,
     });
-  })
+  }),
 );
 const deleteSingleSemister = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     const result =
       yield academicSemester_service_1.AcademicSemesterService.deleteSingleSemister(
-        id
+        id,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -134,7 +134,7 @@ const deleteSingleSemister = (0, catchAsync_1.default)((req, res) =>
       message: 'Semester deleted Successfully',
       data: result,
     });
-  })
+  }),
 );
 const updateSemister = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -143,7 +143,7 @@ const updateSemister = (0, catchAsync_1.default)((req, res) =>
     const result =
       yield academicSemester_service_1.AcademicSemesterService.updateSemister(
         id,
-        updatedData
+        updatedData,
       );
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -151,7 +151,7 @@ const updateSemister = (0, catchAsync_1.default)((req, res) =>
       message: 'Semester Update Successfully',
       data: result,
     });
-  })
+  }),
 );
 exports.AcademicSemesterController = {
   createSemester,

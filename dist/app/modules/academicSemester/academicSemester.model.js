@@ -72,7 +72,7 @@ const academicSemesterSchema = new mongoose_1.Schema(
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 academicSemesterSchema.pre('save', function (next) {
   return __awaiter(this, void 0, void 0, function* () {
@@ -83,7 +83,7 @@ academicSemesterSchema.pre('save', function (next) {
     if (isExsist) {
       throw new ApiError_1.default(
         http_status_1.default.CONFLICT,
-        'Academic Semister is already exsist'
+        'Academic Semister is already exsist',
       );
     }
     next();
@@ -91,6 +91,6 @@ academicSemesterSchema.pre('save', function (next) {
 });
 exports.AcademicSemester = (0, mongoose_1.model)(
   'AcademicSemester',
-  academicSemesterSchema
+  academicSemesterSchema,
 );
 // Handle same year and same semister issue

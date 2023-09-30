@@ -67,7 +67,7 @@ const createStudent = (0, catchAsync_1.default)((req, res) =>
       userData = __rest(_a, ['student']);
     const result = yield user_service_1.UserService.createStudent(
       student,
-      userData
+      userData,
     );
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -75,7 +75,7 @@ const createStudent = (0, catchAsync_1.default)((req, res) =>
       message: 'Student Created Successfully',
       data: result,
     });
-  })
+  }),
 );
 const createFaculty = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -84,7 +84,7 @@ const createFaculty = (0, catchAsync_1.default)((req, res) =>
       userData = __rest(_b, ['faculty']);
     const result = yield user_service_1.UserService.createFaculty(
       faculty,
-      userData
+      userData,
     );
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -92,7 +92,7 @@ const createFaculty = (0, catchAsync_1.default)((req, res) =>
       message: 'Faculty Created Successfully',
       data: result,
     });
-  })
+  }),
 );
 const createAdmin = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -101,7 +101,7 @@ const createAdmin = (0, catchAsync_1.default)((req, res) =>
       userData = __rest(_c, ['admin']);
     const result = yield user_service_1.UserService.createAdmin(
       admin,
-      userData
+      userData,
     );
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -109,7 +109,7 @@ const createAdmin = (0, catchAsync_1.default)((req, res) =>
       message: 'Admin Created Successfully',
       data: result,
     });
-  })
+  }),
 );
 exports.UserController = {
   createStudent,

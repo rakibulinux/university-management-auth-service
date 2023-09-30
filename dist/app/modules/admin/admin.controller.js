@@ -50,15 +50,15 @@ const getAllAdmins = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const filters = (0, pick_1.default)(
       req.query,
-      admin_constent_1.adminFilterableFields
+      admin_constent_1.adminFilterableFields,
     );
     const paginationOptions = (0, pick_1.default)(
       req.query,
-      pagination_1.paginationField
+      pagination_1.paginationField,
     );
     const result = yield admin_service_1.AdminService.getAllAdmins(
       filters,
-      paginationOptions
+      paginationOptions,
     );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -68,7 +68,7 @@ const getAllAdmins = (0, catchAsync_1.default)((req, res) =>
       meta: result.meta,
       data: result.data,
     });
-  })
+  }),
 );
 const getSingleAdmin = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -81,7 +81,7 @@ const getSingleAdmin = (0, catchAsync_1.default)((req, res) =>
       message: 'Admin retrived Successfully',
       data: result,
     });
-  })
+  }),
 );
 const deleteSingleAdmin = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -94,7 +94,7 @@ const deleteSingleAdmin = (0, catchAsync_1.default)((req, res) =>
       message: 'Admin deleted Successfully',
       data: result,
     });
-  })
+  }),
 );
 const updateAdmin = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -102,7 +102,7 @@ const updateAdmin = (0, catchAsync_1.default)((req, res) =>
     const updatedData = req.body;
     const result = yield admin_service_1.AdminService.updateAdmin(
       id,
-      updatedData
+      updatedData,
     );
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -110,7 +110,7 @@ const updateAdmin = (0, catchAsync_1.default)((req, res) =>
       message: 'Admin Update Successfully',
       data: result,
     });
-  })
+  }),
 );
 exports.AdminController = {
   getAllAdmins,

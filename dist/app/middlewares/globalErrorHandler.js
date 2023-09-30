@@ -7,16 +7,16 @@ var __importDefault =
 Object.defineProperty(exports, '__esModule', { value: true });
 const config_1 = __importDefault(require('../../config'));
 const handleValidatorError_1 = __importDefault(
-  require('../../errors/handleValidatorError')
+  require('../../errors/handleValidatorError'),
 );
 const ApiError_1 = __importDefault(require('../../errors/ApiError'));
 const logger_1 = require('../../shared/logger');
 const zod_1 = require('zod');
 const handleZodError_1 = __importDefault(
-  require('../../errors/handleZodError')
+  require('../../errors/handleZodError'),
 );
 const handleCastError_1 = __importDefault(
-  require('../../errors/handleCastError')
+  require('../../errors/handleCastError'),
 );
 // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 const globalErrorHandler = (error, req, res, next) => {

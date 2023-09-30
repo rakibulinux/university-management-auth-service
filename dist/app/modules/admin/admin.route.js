@@ -9,7 +9,7 @@ exports.AdminRoutes = void 0;
 const express_1 = __importDefault(require('express'));
 const admin_controller_1 = require('./admin.controller');
 const validateRequest_1 = __importDefault(
-  require('../../middlewares/validateRequest')
+  require('../../middlewares/validateRequest'),
 );
 const admin_validation_1 = require('./admin.validation');
 const router = express_1.default.Router();
@@ -19,8 +19,8 @@ router.delete('/:id', admin_controller_1.AdminController.deleteSingleAdmin);
 router.patch(
   '/:id',
   (0, validateRequest_1.default)(
-    admin_validation_1.AdminValidation.updateAdminZodSchema
+    admin_validation_1.AdminValidation.updateAdminZodSchema,
   ),
-  admin_controller_1.AdminController.updateAdmin
+  admin_controller_1.AdminController.updateAdmin,
 );
 exports.AdminRoutes = router;

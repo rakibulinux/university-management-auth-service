@@ -44,7 +44,7 @@ const UserSchema = new Schema<IUser, UserModel>(
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 
 // UserSchema.methods.isUserExsist = async function (
@@ -64,19 +64,19 @@ const UserSchema = new Schema<IUser, UserModel>(
 // };
 
 UserSchema.statics.isUserExsist = async function (
-  id: string
+  id: string,
 ): Promise<Pick<
   IUser,
   'id' | 'role' | 'password' | 'needsPasswordChanged'
 > | null> {
   return await User.findOne(
     { id },
-    { id: 1, role: 1, password: 1, needsPasswordChanged: 1 }
+    { id: 1, role: 1, password: 1, needsPasswordChanged: 1 },
   );
 };
 UserSchema.statics.isPasswordMatched = async function (
   givenPassword: string,
-  savedPassword: string
+  savedPassword: string,
 ): Promise<boolean> {
   return await bcrypt.compare(givenPassword, savedPassword);
 };
@@ -85,7 +85,7 @@ UserSchema.pre('save', async function (next) {
   const user = this;
   user.password = await bcrypt.hash(
     user.password,
-    Number(config.bcrypt_salt_rounds)
+    Number(config.bcrypt_salt_rounds),
   );
   if (!user.needsPasswordChanged) {
     user.passwordChangedAt = new Date();

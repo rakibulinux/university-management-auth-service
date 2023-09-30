@@ -65,7 +65,7 @@ export const AdminSchema = new Schema<IAdmin, AdminModel>(
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 
 export const Admin = model<IAdmin, AdminModel>('Admin', AdminSchema);

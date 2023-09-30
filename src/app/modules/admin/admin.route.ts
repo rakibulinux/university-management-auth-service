@@ -12,7 +12,7 @@ router.delete('/:id', AdminController.deleteSingleAdmin);
 router.patch(
   '/:id',
   validateRequest(AdminValidation.updateAdminZodSchema),
-  AdminController.updateAdmin
+  AdminController.updateAdmin,
 );
 
 export const AdminRoutes = router;

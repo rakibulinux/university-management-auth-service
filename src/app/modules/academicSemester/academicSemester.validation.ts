@@ -48,7 +48,7 @@ const updateAcademicSemesterZodSchema = z
       (!data.body.title && !data.body.code),
     {
       message: 'Either provide title and code both neither update others',
-    }
+    },
   );
 
 export const AcademicSemesterValidation = {

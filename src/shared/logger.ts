@@ -17,7 +17,7 @@ const logger = createLogger({
   format: combine(
     label({ label: 'right meow!' }),
     timestamp(),
-    myFormat
+    myFormat,
     /* prettyPrint() */
   ),
   transports: [
@@ -28,7 +28,7 @@ const logger = createLogger({
         'logs',
         'winston',
         'success',
-        'ph-success-%DATE%.log'
+        'ph-success-%DATE%.log',
       ),
       datePattern: 'YYYY-DD-MM-HH',
       zippedArchive: true,
@@ -42,7 +42,7 @@ const errorLogger = createLogger({
   format: combine(
     label({ label: 'right meow!' }),
     timestamp(),
-    myFormat
+    myFormat,
     /* prettyPrint() */
   ),
   transports: [
@@ -53,7 +53,7 @@ const errorLogger = createLogger({
         'logs',
         'winston',
         'error',
-        'ph-error-%DATE%.log'
+        'ph-error-%DATE%.log',
       ),
       datePattern: 'YYYY-DD-MM-HH',
       zippedArchive: true,

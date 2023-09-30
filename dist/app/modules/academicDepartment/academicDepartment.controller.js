@@ -68,7 +68,7 @@ const createDepartment = (0, catchAsync_1.default)((req, res) =>
     const academicDepartmentData = __rest(req.body, []);
     const result =
       yield academicDepartment_service_1.AcademicDepartmentService.createDepartment(
-        academicDepartmentData
+        academicDepartmentData,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -77,22 +77,22 @@ const createDepartment = (0, catchAsync_1.default)((req, res) =>
       message: 'Academic Department is Created Successfully',
       data: result,
     });
-  })
+  }),
 );
 const getAllDepartments = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const filters = (0, pick_1.default)(
       req.query,
-      academicDepartment_constant_1.academicDepartmentFilterableFields
+      academicDepartment_constant_1.academicDepartmentFilterableFields,
     );
     const paginationOptions = (0, pick_1.default)(
       req.query,
-      pagination_1.paginationField
+      pagination_1.paginationField,
     );
     const result =
       yield academicDepartment_service_1.AcademicDepartmentService.getAllDepartments(
         filters,
-        paginationOptions
+        paginationOptions,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -102,14 +102,14 @@ const getAllDepartments = (0, catchAsync_1.default)((req, res) =>
       meta: result.meta,
       data: result.data,
     });
-  })
+  }),
 );
 const getSingleDepartment = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     const result =
       yield academicDepartment_service_1.AcademicDepartmentService.getSingleDepartment(
-        id
+        id,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -118,14 +118,14 @@ const getSingleDepartment = (0, catchAsync_1.default)((req, res) =>
       message: 'Department retrived Successfully',
       data: result,
     });
-  })
+  }),
 );
 const deleteSingleDepartment = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     const result =
       yield academicDepartment_service_1.AcademicDepartmentService.deleteSingleDepartment(
-        id
+        id,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -134,7 +134,7 @@ const deleteSingleDepartment = (0, catchAsync_1.default)((req, res) =>
       message: 'Department deleted Successfully',
       data: result,
     });
-  })
+  }),
 );
 const updateDepartment = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -143,7 +143,7 @@ const updateDepartment = (0, catchAsync_1.default)((req, res) =>
     const result =
       yield academicDepartment_service_1.AcademicDepartmentService.updateDepartment(
         id,
-        updatedData
+        updatedData,
       );
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -151,7 +151,7 @@ const updateDepartment = (0, catchAsync_1.default)((req, res) =>
       message: 'Department Update Successfully',
       data: result,
     });
-  })
+  }),
 );
 exports.AcademicDepartmentController = {
   createDepartment,

@@ -13,7 +13,7 @@ router.delete('/:id', FacultyController.deleteSingleFaculty);
 router.patch(
   '/:id',
   validateRequest(FacultyValidation.updateFacultyZodSchema),
-  FacultyController.updateFaculty
+  FacultyController.updateFaculty,
 );
 
 export const FacultyRoutes = router;

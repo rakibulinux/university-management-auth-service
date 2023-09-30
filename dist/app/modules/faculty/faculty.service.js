@@ -57,7 +57,7 @@ var __importDefault =
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.FacultyService = void 0;
 const paginationHelpers_1 = __importDefault(
-  require('../../helpers/paginationHelpers')
+  require('../../helpers/paginationHelpers'),
 );
 const faculty_constent_1 = require('./faculty.constent');
 const faculty_model_1 = require('./faculty.model');
@@ -123,7 +123,7 @@ const updateFaculty = (id, payload) =>
     if (!isExsist) {
       throw new ApiError_1.default(
         http_status_1.default.NOT_FOUND,
-        'Faculty Not found'
+        'Faculty Not found',
       );
     }
     const { name } = payload,
@@ -140,7 +140,7 @@ const updateFaculty = (id, payload) =>
       updateFacultyData,
       {
         new: true,
-      }
+      },
     );
     return result;
   });

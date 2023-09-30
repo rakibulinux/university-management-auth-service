@@ -57,7 +57,7 @@ const createStudent = (student, user) =>
     user.role = 'student';
     const academicSemester =
       yield academicSemester_model_1.AcademicSemester.findById(
-        student.academicSemester
+        student.academicSemester,
       );
     let newUserAllData = null;
     const session = yield mongoose_1.default.startSession();
@@ -72,7 +72,7 @@ const createStudent = (student, user) =>
       if (!newStudent.length) {
         throw new ApiError_1.default(
           http_status_1.default.BAD_REQUEST,
-          'Student create failed'
+          'Student create failed',
         );
       }
       user.student = newStudent[0]._id;
@@ -80,7 +80,7 @@ const createStudent = (student, user) =>
       if (!newUser.length) {
         throw new ApiError_1.default(
           http_status_1.default.BAD_REQUEST,
-          'User create failed'
+          'User create failed',
         );
       }
       newUserAllData = newUser[0];
@@ -130,7 +130,7 @@ const createFaculty = (faculty, user) =>
       if (!newFaculty.length) {
         throw new ApiError_1.default(
           http_status_1.default.BAD_REQUEST,
-          'Faculty create failed'
+          'Faculty create failed',
         );
       }
       user.faculty = newFaculty[0]._id;
@@ -138,7 +138,7 @@ const createFaculty = (faculty, user) =>
       if (!newUser.length) {
         throw new ApiError_1.default(
           http_status_1.default.BAD_REQUEST,
-          'User create failed'
+          'User create failed',
         );
       }
       newUserAllData = newUser[0];
@@ -183,7 +183,7 @@ const createAdmin = (admin, user) =>
       if (!newFaculty.length) {
         throw new ApiError_1.default(
           http_status_1.default.BAD_REQUEST,
-          'Faculty create failed'
+          'Faculty create failed',
         );
       }
       user.faculty = newFaculty[0]._id;
@@ -191,7 +191,7 @@ const createAdmin = (admin, user) =>
       if (!newUser.length) {
         throw new ApiError_1.default(
           http_status_1.default.BAD_REQUEST,
-          'User create failed'
+          'User create failed',
         );
       }
       newUserAllData = newUser[0];

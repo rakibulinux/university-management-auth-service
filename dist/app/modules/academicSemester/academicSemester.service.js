@@ -61,7 +61,7 @@ const ApiError_1 = __importDefault(require('../../../errors/ApiError'));
 const academicSemester_constant_1 = require('./academicSemester.constant');
 const academicSemester_model_1 = require('./academicSemester.model');
 const paginationHelpers_1 = __importDefault(
-  require('../../helpers/paginationHelpers')
+  require('../../helpers/paginationHelpers'),
 );
 const createSemister = payload =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -72,12 +72,11 @@ const createSemister = payload =>
     ) {
       throw new ApiError_1.default(
         http_status_1.default.BAD_REQUEST,
-        'Invalid Semister Code'
+        'Invalid Semister Code',
       );
     }
-    const result = yield academicSemester_model_1.AcademicSemester.create(
-      payload
-    );
+    const result =
+      yield academicSemester_model_1.AcademicSemester.create(payload);
     return result;
   });
 const getAllSemisters = (filters, paginationOptions) =>
@@ -93,7 +92,7 @@ const getAllSemisters = (filters, paginationOptions) =>
               $regex: searchTerm,
               $options: 'i',
             },
-          })
+          }),
         ),
       });
     }
@@ -113,7 +112,7 @@ const getAllSemisters = (filters, paginationOptions) =>
     const whereCondition =
       andCondition.length > 0 ? { $and: andCondition } : {};
     const result = yield academicSemester_model_1.AcademicSemester.find(
-      whereCondition
+      whereCondition,
     )
       .sort(sortCondition)
       .skip(skip)
@@ -151,7 +150,7 @@ const updateSemister = (id, payload) =>
     ) {
       throw new ApiError_1.default(
         http_status_1.default.BAD_REQUEST,
-        'Invalid Semister Code'
+        'Invalid Semister Code',
       );
     }
     const result =
@@ -160,7 +159,7 @@ const updateSemister = (id, payload) =>
         payload,
         {
           new: true,
-        }
+        },
       );
     return result;
   });

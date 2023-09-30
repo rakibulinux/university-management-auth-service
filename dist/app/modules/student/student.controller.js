@@ -50,15 +50,15 @@ const getAllStudents = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const filters = (0, pick_1.default)(
       req.query,
-      student_constent_1.studentFilterableFields
+      student_constent_1.studentFilterableFields,
     );
     const paginationOptions = (0, pick_1.default)(
       req.query,
-      pagination_1.paginationField
+      pagination_1.paginationField,
     );
     const result = yield student_service_1.StudentService.getAllStudents(
       filters,
-      paginationOptions
+      paginationOptions,
     );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -68,7 +68,7 @@ const getAllStudents = (0, catchAsync_1.default)((req, res) =>
       meta: result.meta,
       data: result.data,
     });
-  })
+  }),
 );
 const getSingleStudent = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -81,14 +81,13 @@ const getSingleStudent = (0, catchAsync_1.default)((req, res) =>
       message: 'Student retrived Successfully',
       data: result,
     });
-  })
+  }),
 );
 const deleteSingleStudent = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const result = yield student_service_1.StudentService.deleteSingleStudent(
-      id
-    );
+    const result =
+      yield student_service_1.StudentService.deleteSingleStudent(id);
     // next();
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -96,7 +95,7 @@ const deleteSingleStudent = (0, catchAsync_1.default)((req, res) =>
       message: 'Student deleted Successfully',
       data: result,
     });
-  })
+  }),
 );
 const updateStudent = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -104,7 +103,7 @@ const updateStudent = (0, catchAsync_1.default)((req, res) =>
     const updatedData = req.body;
     const result = yield student_service_1.StudentService.updateStudent(
       id,
-      updatedData
+      updatedData,
     );
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -112,7 +111,7 @@ const updateStudent = (0, catchAsync_1.default)((req, res) =>
       message: 'Student Update Successfully',
       data: result,
     });
-  })
+  }),
 );
 exports.StudentController = {
   getAllStudents,

@@ -68,7 +68,7 @@ const createFaculty = (0, catchAsync_1.default)((req, res) =>
     const academicFacultyData = __rest(req.body, []);
     const result =
       yield academicFaculty_service_1.AcademicFacultyService.createFaculty(
-        academicFacultyData
+        academicFacultyData,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -77,22 +77,22 @@ const createFaculty = (0, catchAsync_1.default)((req, res) =>
       message: 'Academic Faculty is Created Successfully',
       data: result,
     });
-  })
+  }),
 );
 const getAllSemisters = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const filters = (0, pick_1.default)(
       req.query,
-      academicFaculty_constant_1.academicFacultyFilterableFields
+      academicFaculty_constant_1.academicFacultyFilterableFields,
     );
     const paginationOptions = (0, pick_1.default)(
       req.query,
-      pagination_1.paginationField
+      pagination_1.paginationField,
     );
     const result =
       yield academicFaculty_service_1.AcademicFacultyService.getAllFacultys(
         filters,
-        paginationOptions
+        paginationOptions,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -102,14 +102,14 @@ const getAllSemisters = (0, catchAsync_1.default)((req, res) =>
       meta: result.meta,
       data: result.data,
     });
-  })
+  }),
 );
 const getSingleSemister = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     const result =
       yield academicFaculty_service_1.AcademicFacultyService.getSingleFaculty(
-        id
+        id,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -118,14 +118,14 @@ const getSingleSemister = (0, catchAsync_1.default)((req, res) =>
       message: 'Faculty retrived Successfully',
       data: result,
     });
-  })
+  }),
 );
 const deleteSingleSemister = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     const result =
       yield academicFaculty_service_1.AcademicFacultyService.deleteSingleFaculty(
-        id
+        id,
       );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -134,7 +134,7 @@ const deleteSingleSemister = (0, catchAsync_1.default)((req, res) =>
       message: 'Faculty deleted Successfully',
       data: result,
     });
-  })
+  }),
 );
 const updateSemister = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -143,7 +143,7 @@ const updateSemister = (0, catchAsync_1.default)((req, res) =>
     const result =
       yield academicFaculty_service_1.AcademicFacultyService.updateFaculty(
         id,
-        updatedData
+        updatedData,
       );
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -151,7 +151,7 @@ const updateSemister = (0, catchAsync_1.default)((req, res) =>
       message: 'Faculty Update Successfully',
       data: result,
     });
-  })
+  }),
 );
 exports.AcademicFacultyController = {
   createFaculty,

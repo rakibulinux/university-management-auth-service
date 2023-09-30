@@ -11,9 +11,8 @@ import { academicFacultyFilterableFields } from './academicFaculty.constant';
 const createAcademicFaculty = catchAsync(
   async (req: Request, res: Response) => {
     const { ...academicFacultyData } = req.body;
-    const result = await AcademicFacultyService.createAcademicFaculty(
-      academicFacultyData
-    );
+    const result =
+      await AcademicFacultyService.createAcademicFaculty(academicFacultyData);
     // next();
     sendResponse<IAcademicFaculty>(res, {
       statusCode: httpStatus.OK,
@@ -21,7 +20,7 @@ const createAcademicFaculty = catchAsync(
       message: 'Academic Faculty is Created Successfully',
       data: result,
     });
-  }
+  },
 );
 
 const getAllAcademicFaculties = catchAsync(
@@ -30,7 +29,7 @@ const getAllAcademicFaculties = catchAsync(
     const paginationOptions = pick(req.query, paginationField);
     const result = await AcademicFacultyService.getAllAcademicFaculties(
       filters,
-      paginationOptions
+      paginationOptions,
     );
     // next();
     sendResponse<IAcademicFaculty[]>(res, {
@@ -40,7 +39,7 @@ const getAllAcademicFaculties = catchAsync(
       meta: result.meta,
       data: result.data,
     });
-  }
+  },
 );
 
 const getSingleAcademicFaculty = catchAsync(
@@ -54,7 +53,7 @@ const getSingleAcademicFaculty = catchAsync(
       message: 'Academic Faculty retrived Successfully',
       data: result,
     });
-  }
+  },
 );
 const deleteSingleAcademicFaculty = catchAsync(
   async (req: Request, res: Response) => {
@@ -67,7 +66,7 @@ const deleteSingleAcademicFaculty = catchAsync(
       message: 'Academic Faculty deleted Successfully',
       data: result,
     });
-  }
+  },
 );
 const updateAcademicFaculty = catchAsync(
   async (req: Request, res: Response) => {
@@ -75,7 +74,7 @@ const updateAcademicFaculty = catchAsync(
     const updatedData = req.body;
     const result = await AcademicFacultyService.updateAcademicFaculty(
       id,
-      updatedData
+      updatedData,
     );
     sendResponse<IAcademicFaculty>(res, {
       statusCode: httpStatus.OK,
@@ -83,7 +82,7 @@ const updateAcademicFaculty = catchAsync(
       message: 'Academic Faculty Update Successfully',
       data: result,
     });
-  }
+  },
 );
 
 export const AcademicFacultyController = {

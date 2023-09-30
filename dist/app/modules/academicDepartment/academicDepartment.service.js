@@ -59,12 +59,12 @@ exports.AcademicDepartmentService = void 0;
 const academicDepartment_constant_1 = require('./academicDepartment.constant');
 const academicDepartment_model_1 = require('./academicDepartment.model');
 const paginationHelpers_1 = __importDefault(
-  require('../../helpers/paginationHelpers')
+  require('../../helpers/paginationHelpers'),
 );
 const createDepartment = payload =>
   __awaiter(void 0, void 0, void 0, function* () {
     const result = (yield academicDepartment_model_1.AcademicDepartment.create(
-      payload
+      payload,
     )).populate('academicFaculty');
     return result;
   });
@@ -81,7 +81,7 @@ const getAllDepartments = (filters, paginationOptions) =>
               $regex: searchTerm,
               $options: 'i',
             },
-          })
+          }),
         ),
       });
     }
@@ -101,7 +101,7 @@ const getAllDepartments = (filters, paginationOptions) =>
     const whereCondition =
       andCondition.length > 0 ? { $and: andCondition } : {};
     const result = yield academicDepartment_model_1.AcademicDepartment.find(
-      whereCondition
+      whereCondition,
     )
       .populate('academicFaculty')
       .sort(sortCondition)
@@ -120,9 +120,8 @@ const getAllDepartments = (filters, paginationOptions) =>
   });
 const getSingleDepartment = id =>
   __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield academicDepartment_model_1.AcademicDepartment.findById(
-      id
-    );
+    const result =
+      yield academicDepartment_model_1.AcademicDepartment.findById(id);
     return result;
   });
 const deleteSingleDepartment = id =>
@@ -139,7 +138,7 @@ const updateDepartment = (id, payload) =>
         payload,
         {
           new: true,
-        }
+        },
       ).populate('academicFaculty');
     return result;
   });

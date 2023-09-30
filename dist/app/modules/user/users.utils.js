@@ -46,7 +46,7 @@ const findLastStudentId = () =>
   __awaiter(void 0, void 0, void 0, function* () {
     const lastStudentId = yield user_model_1.User.findOne(
       { role: 'student' },
-      { id: 1, _id: 0 }
+      { id: 1, _id: 0 },
     )
       .sort({
         createdAt: -1,
@@ -84,7 +84,7 @@ const findLastFacultyId = () =>
   __awaiter(void 0, void 0, void 0, function* () {
     const lastFacultyId = yield user_model_1.User.findOne(
       { role: 'faculty' },
-      { id: 1, _id: 0 }
+      { id: 1, _id: 0 },
     )
       .sort({
         createdAt: -1,
@@ -114,7 +114,7 @@ const findLastAdminId = () =>
   __awaiter(void 0, void 0, void 0, function* () {
     const lastAdminId = yield user_model_1.User.findOne(
       { role: 'admin' },
-      { id: 1, _id: 0 }
+      { id: 1, _id: 0 },
     )
       .sort({
         createdAt: -1,

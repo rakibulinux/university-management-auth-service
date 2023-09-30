@@ -83,7 +83,7 @@ export const FacultySchema = new Schema<IFaculty, FacultyModel>(
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 
 export const Faculty = model<IFaculty, FacultyModel>('Faculty', FacultySchema);

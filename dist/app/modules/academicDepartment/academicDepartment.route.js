@@ -8,7 +8,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 exports.AcademicDepartmentRoutes = void 0;
 const express_1 = __importDefault(require('express'));
 const validateRequest_1 = __importDefault(
-  require('../../middlewares/validateRequest')
+  require('../../middlewares/validateRequest'),
 );
 const academicDepartment_validation_1 = require('./academicDepartment.validation');
 const academicDepartment_controller_1 = require('./academicDepartment.controller');
@@ -17,30 +17,31 @@ router.post(
   '/create-department',
   (0, validateRequest_1.default)(
     academicDepartment_validation_1.AcademicDepartmentValidation
-      .createAcademicDepartmentZodSchema
+      .createAcademicDepartmentZodSchema,
   ),
-  academicDepartment_controller_1.AcademicDepartmentController.createDepartment
+  academicDepartment_controller_1.AcademicDepartmentController.createDepartment,
 );
 router.patch(
   '/:id',
   (0, validateRequest_1.default)(
     academicDepartment_validation_1.AcademicDepartmentValidation
-      .updateAcademicDepartmentZodSchema
+      .updateAcademicDepartmentZodSchema,
   ),
-  academicDepartment_controller_1.AcademicDepartmentController.updateDepartment
+  academicDepartment_controller_1.AcademicDepartmentController.updateDepartment,
 );
 router.get(
   '/:id',
   academicDepartment_controller_1.AcademicDepartmentController
-    .getSingleDepartment
+    .getSingleDepartment,
 );
 router.delete(
   '/:id',
   academicDepartment_controller_1.AcademicDepartmentController
-    .deleteSingleDepartment
+    .deleteSingleDepartment,
 );
 router.get(
   '/',
-  academicDepartment_controller_1.AcademicDepartmentController.getAllDepartments
+  academicDepartment_controller_1.AcademicDepartmentController
+    .getAllDepartments,
 );
 exports.AcademicDepartmentRoutes = router;

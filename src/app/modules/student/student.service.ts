@@ -12,7 +12,7 @@ import { User } from '../user/user.model';
 
 const getAllStudents = async (
   filters: IStudentFilters,
-  paginationOptions: IPaginationOptions
+  paginationOptions: IPaginationOptions,
 ): Promise<IGenericResponse<IStudent[]>> => {
   const { searchTerm, ...filtersData } = filters;
 
@@ -74,7 +74,7 @@ const getSingleStudent = async (id: string): Promise<IStudent | null> => {
   if (!result) {
     throw new ApiError(
       httpStatus.NOT_FOUND,
-      'Student ID is wrong or No Student Found'
+      'Student ID is wrong or No Student Found',
     );
   }
   return result;
@@ -111,7 +111,7 @@ const deleteSingleStudent = async (id: string): Promise<IStudent | null> => {
 
 const updateStudent = async (
   id: string,
-  payload: Partial<IStudent>
+  payload: Partial<IStudent>,
 ): Promise<IStudent | null> => {
   const isExsist = await Student.findOne({ id: id });
 

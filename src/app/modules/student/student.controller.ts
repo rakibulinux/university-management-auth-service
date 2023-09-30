@@ -13,7 +13,7 @@ const getAllStudents = catchAsync(async (req: Request, res: Response) => {
   const paginationOptions = pick(req.query, paginationField);
   const result = await StudentService.getAllStudents(
     filters,
-    paginationOptions
+    paginationOptions,
   );
 
   // next();

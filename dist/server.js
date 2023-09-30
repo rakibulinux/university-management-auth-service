@@ -50,7 +50,7 @@ function startServer() {
       logger_1.logger.info(`🛢   Database is connected successfully`);
       server = app_1.default.listen(index_1.default.port, () => {
         logger_1.logger.info(
-          `Application listening on port ${index_1.default.port}`
+          `Application listening on port ${index_1.default.port}`,
         );
       });
     } catch (err) {

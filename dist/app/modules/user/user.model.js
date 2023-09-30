@@ -35,6 +35,6 @@ const userSchema = new mongoose_1.Schema(
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 exports.User = (0, mongoose_1.model)('User', userSchema);

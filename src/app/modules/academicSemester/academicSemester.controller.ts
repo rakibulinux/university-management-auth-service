@@ -10,9 +10,8 @@ import { academicSemesterFilterableFields } from './academicSemester.constant';
 
 const createSemester = catchAsync(async (req: Request, res: Response) => {
   const { ...academicSemesterData } = req.body;
-  const result = await AcademicSemesterService.createSemister(
-    academicSemesterData
-  );
+  const result =
+    await AcademicSemesterService.createSemister(academicSemesterData);
   // next();
   sendResponse<IAcademicSemester>(res, {
     statusCode: httpStatus.OK,
@@ -27,7 +26,7 @@ const getAllSemisters = catchAsync(async (req: Request, res: Response) => {
   const paginationOptions = pick(req.query, paginationField);
   const result = await AcademicSemesterService.getAllSemisters(
     filters,
-    paginationOptions
+    paginationOptions,
   );
   // next();
   sendResponse<IAcademicSemester[]>(res, {

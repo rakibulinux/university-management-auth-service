@@ -9,29 +9,29 @@ exports.UserRoutes = void 0;
 const express_1 = __importDefault(require('express'));
 const user_controller_1 = require('./user.controller');
 const validateRequest_1 = __importDefault(
-  require('../../middlewares/validateRequest')
+  require('../../middlewares/validateRequest'),
 );
 const user_validation_1 = require('./user.validation');
 const router = express_1.default.Router();
 router.post(
   '/create-student',
   (0, validateRequest_1.default)(
-    user_validation_1.UserValidation.createStudentZodSchema
+    user_validation_1.UserValidation.createStudentZodSchema,
   ),
-  user_controller_1.UserController.createStudent
+  user_controller_1.UserController.createStudent,
 );
 router.post(
   '/create-faculty',
   (0, validateRequest_1.default)(
-    user_validation_1.UserValidation.createFacultyZodSchema
+    user_validation_1.UserValidation.createFacultyZodSchema,
   ),
-  user_controller_1.UserController.createFaculty
+  user_controller_1.UserController.createFaculty,
 );
 router.post(
   '/create-admin',
   (0, validateRequest_1.default)(
-    user_validation_1.UserValidation.createAdminZodSchema
+    user_validation_1.UserValidation.createAdminZodSchema,
   ),
-  user_controller_1.UserController.createAdmin
+  user_controller_1.UserController.createAdmin,
 );
 exports.UserRoutes = router;

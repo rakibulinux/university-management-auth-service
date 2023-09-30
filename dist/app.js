@@ -42,7 +42,7 @@ const express_1 = __importDefault(require('express'));
 const cors_1 = __importDefault(require('cors'));
 const http_status_1 = __importDefault(require('http-status'));
 const globalErrorHandler_1 = __importDefault(
-  require('./app/middlewares/globalErrorHandler')
+  require('./app/middlewares/globalErrorHandler'),
 );
 const routes_1 = __importDefault(require('./app/routes'));
 const app = (0, express_1.default)();
@@ -54,7 +54,7 @@ app.use('/api/v1', routes_1.default);
 app.get('/', (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     res.send('API Server Is Working Fine');
-  })
+  }),
 );
 //handle not found
 app.use((req, res, next) => {

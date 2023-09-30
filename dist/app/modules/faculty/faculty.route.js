@@ -10,7 +10,7 @@ const express_1 = __importDefault(require('express'));
 // import validateRequest from '../../middlewares/validateRequest';
 const faculty_controller_1 = require('./faculty.controller');
 const validateRequest_1 = __importDefault(
-  require('../../middlewares/validateRequest')
+  require('../../middlewares/validateRequest'),
 );
 const student_validation_1 = require('./student.validation');
 const router = express_1.default.Router();
@@ -18,13 +18,13 @@ router.get('/:id', faculty_controller_1.FacultyController.getSingleFaculty);
 router.get('/', faculty_controller_1.FacultyController.getAllFaculties);
 router.delete(
   '/:id',
-  faculty_controller_1.FacultyController.deleteSingleFaculty
+  faculty_controller_1.FacultyController.deleteSingleFaculty,
 );
 router.patch(
   '/:id',
   (0, validateRequest_1.default)(
-    student_validation_1.FacultyValidation.updateFacultyZodSchema
+    student_validation_1.FacultyValidation.updateFacultyZodSchema,
   ),
-  faculty_controller_1.FacultyController.updateFaculty
+  faculty_controller_1.FacultyController.updateFaculty,
 );
 exports.FacultyRoutes = router;

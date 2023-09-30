@@ -57,7 +57,7 @@ var __importDefault =
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.StudentService = void 0;
 const paginationHelpers_1 = __importDefault(
-  require('../../helpers/paginationHelpers')
+  require('../../helpers/paginationHelpers'),
 );
 const student_constent_1 = require('./student.constent');
 const student_model_1 = require('./student.model');
@@ -126,7 +126,7 @@ const updateStudent = (id, payload) =>
     if (!isExsist) {
       throw new ApiError_1.default(
         http_status_1.default.NOT_FOUND,
-        'Student Not found'
+        'Student Not found',
       );
     }
     const { name, guardian, localGuardian } = payload,
@@ -155,7 +155,7 @@ const updateStudent = (id, payload) =>
       updateStudentData,
       {
         new: true,
-      }
+      },
     );
     return result;
   });

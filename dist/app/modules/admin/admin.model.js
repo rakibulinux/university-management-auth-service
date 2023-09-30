@@ -66,6 +66,6 @@ exports.AdminSchema = new mongoose_1.Schema(
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 exports.Admin = (0, mongoose_1.model)('Admin', exports.AdminSchema);

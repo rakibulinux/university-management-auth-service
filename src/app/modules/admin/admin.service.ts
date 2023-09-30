@@ -12,7 +12,7 @@ import { User } from '../user/user.model';
 
 const getAllAdmins = async (
   filters: IAdminFilters,
-  paginationOptions: IPaginationOptions
+  paginationOptions: IPaginationOptions,
 ): Promise<IGenericResponse<IAdmin[]>> => {
   const { searchTerm, ...filtersData } = filters;
 
@@ -68,7 +68,7 @@ const getSingleAdmin = async (id: string): Promise<IAdmin | null> => {
   if (!result) {
     throw new ApiError(
       httpStatus.NOT_FOUND,
-      'Admin ID is wrong or No Admin Found'
+      'Admin ID is wrong or No Admin Found',
     );
   }
   return result;
@@ -105,7 +105,7 @@ const deleteSingleAdmin = async (id: string): Promise<IAdmin | null> => {
 
 const updateAdmin = async (
   id: string,
-  payload: Partial<IAdmin>
+  payload: Partial<IAdmin>,
 ): Promise<IAdmin | null> => {
   const isExsist = await Admin.findOne({ _id: id });
 

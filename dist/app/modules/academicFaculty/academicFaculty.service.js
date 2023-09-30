@@ -57,15 +57,14 @@ var __importDefault =
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.AcademicFacultyService = void 0;
 const paginationHelpers_1 = __importDefault(
-  require('../../helpers/paginationHelpers')
+  require('../../helpers/paginationHelpers'),
 );
 const academicFaculty_model_1 = require('./academicFaculty.model');
 const academicFaculty_constant_1 = require('./academicFaculty.constant');
 const createFaculty = payload =>
   __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield academicFaculty_model_1.AcademicFaculty.create(
-      payload
-    );
+    const result =
+      yield academicFaculty_model_1.AcademicFaculty.create(payload);
     return result;
   });
 const getAllFacultys = (filters, paginationOptions) =>
@@ -81,7 +80,7 @@ const getAllFacultys = (filters, paginationOptions) =>
               $regex: searchTerm,
               $options: 'i',
             },
-          })
+          }),
         ),
       });
     }
@@ -101,7 +100,7 @@ const getAllFacultys = (filters, paginationOptions) =>
     const whereCondition =
       andCondition.length > 0 ? { $and: andCondition } : {};
     const result = yield academicFaculty_model_1.AcademicFaculty.find(
-      whereCondition
+      whereCondition,
     )
       .sort(sortCondition)
       .skip(skip)
@@ -136,7 +135,7 @@ const updateFaculty = (id, payload) =>
         payload,
         {
           new: true,
-        }
+        },
       );
     return result;
   });

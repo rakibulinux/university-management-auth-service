@@ -9,7 +9,7 @@ const createAcademicSemesterZodSchema = zod_1.z.object({
       [...academicSemester_constant_1.academicSemesterTitle],
       {
         required_error: 'Title is required',
-      }
+      },
     ),
     year: zod_1.z.string({
       required_error: 'Year is required',
@@ -21,13 +21,13 @@ const createAcademicSemesterZodSchema = zod_1.z.object({
       [...academicSemester_constant_1.academicSemesterMonth],
       {
         required_error: 'Start Month is required',
-      }
+      },
     ),
     endMonth: zod_1.z.enum(
       [...academicSemester_constant_1.academicSemesterMonth],
       {
         required_error: 'Start Month is required',
-      }
+      },
     ),
   }),
 });
@@ -55,7 +55,7 @@ const updateAcademicSemesterZodSchema = zod_1.z
       (!data.body.title && !data.body.code),
     {
       message: 'Either provide title and code both neither update others',
-    }
+    },
   );
 exports.AcademicSemesterValidation = {
   createAcademicSemesterZodSchema,

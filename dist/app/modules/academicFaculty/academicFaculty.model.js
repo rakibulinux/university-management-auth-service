@@ -11,10 +11,10 @@ const AcademicFacultySchema = new mongoose_1.Schema(
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 exports.AcademicFaculty = (0, mongoose_1.model)(
   'AcademicFaculty',
-  AcademicFacultySchema
+  AcademicFacultySchema,
 );
 // Handle same year and same semister issue

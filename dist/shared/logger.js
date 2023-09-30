@@ -21,7 +21,7 @@ const logger = (0, winston_1.createLogger)({
   format: combine(
     label({ label: 'right meow!' }),
     timestamp(),
-    myFormat
+    myFormat,
     // prettyPrint()
   ),
   transports: [
@@ -47,7 +47,7 @@ const errorLogger = (0, winston_1.createLogger)({
   format: combine(
     label({ label: 'right meow!' }),
     timestamp(),
-    myFormat
+    myFormat,
     // prettyPrint()
   ),
   transports: [

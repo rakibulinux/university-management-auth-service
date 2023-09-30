@@ -8,7 +8,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 exports.AcademicSemesterRoutes = void 0;
 const express_1 = __importDefault(require('express'));
 const validateRequest_1 = __importDefault(
-  require('../../middlewares/validateRequest')
+  require('../../middlewares/validateRequest'),
 );
 const academicSemester_validation_1 = require('./academicSemester.validation');
 const academicSemester_controller_1 = require('./academicSemester.controller');
@@ -17,28 +17,28 @@ router.post(
   '/create-semester',
   (0, validateRequest_1.default)(
     academicSemester_validation_1.AcademicSemesterValidation
-      .createAcademicSemesterZodSchema
+      .createAcademicSemesterZodSchema,
   ),
-  academicSemester_controller_1.AcademicSemesterController.createSemester
+  academicSemester_controller_1.AcademicSemesterController.createSemester,
 );
 router.patch(
   '/:id',
   (0, validateRequest_1.default)(
     academicSemester_validation_1.AcademicSemesterValidation
-      .updateAcademicSemesterZodSchema
+      .updateAcademicSemesterZodSchema,
   ),
-  academicSemester_controller_1.AcademicSemesterController.updateSemister
+  academicSemester_controller_1.AcademicSemesterController.updateSemister,
 );
 router.get(
   '/:id',
-  academicSemester_controller_1.AcademicSemesterController.getSingleSemister
+  academicSemester_controller_1.AcademicSemesterController.getSingleSemister,
 );
 router.delete(
   '/:id',
-  academicSemester_controller_1.AcademicSemesterController.deleteSingleSemister
+  academicSemester_controller_1.AcademicSemesterController.deleteSingleSemister,
 );
 router.get(
   '/',
-  academicSemester_controller_1.AcademicSemesterController.getAllSemisters
+  academicSemester_controller_1.AcademicSemesterController.getAllSemisters,
 );
 exports.AcademicSemesterRoutes = router;

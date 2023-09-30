@@ -84,6 +84,6 @@ exports.FacultySchema = new mongoose_1.Schema(
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 exports.Faculty = (0, mongoose_1.model)('Faculty', exports.FacultySchema);

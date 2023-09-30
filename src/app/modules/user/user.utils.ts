@@ -5,7 +5,7 @@ import { User } from './user.model';
 export const findLastStudentId = async () => {
   const lastStudentId = await User.findOne(
     { role: 'student' },
-    { id: 1, _id: 0 }
+    { id: 1, _id: 0 },
   )
     .sort({
       createdAt: -1,
@@ -15,15 +15,15 @@ export const findLastStudentId = async () => {
 };
 
 export const generatedStudentId = async (
-  academicSemester: IAcademicSemester | null
+  academicSemester: IAcademicSemester | null,
 ) => {
   const currentId =
     (await findLastStudentId()) || (0).toString().padStart(5, '0');
 
   let incrementdId = (parseInt(currentId) + 1).toString().padStart(5, '0');
-  incrementdId = `${academicSemester?.year.substring(2)}${
-    academicSemester?.code
-  }${incrementdId}`;
+  incrementdId = `${academicSemester?.year.substring(
+    2,
+  )}${academicSemester?.code}${incrementdId}`;
   return incrementdId;
 };
 
@@ -31,7 +31,7 @@ export const generatedStudentId = async (
 export const findLastFacultyId = async () => {
   const lastFacultyId = await User.findOne(
     { role: 'faculty' },
-    { id: 1, _id: 0 }
+    { id: 1, _id: 0 },
   )
     .sort({
       createdAt: -1,

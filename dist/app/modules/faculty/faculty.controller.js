@@ -50,15 +50,15 @@ const getAllFaculties = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const filters = (0, pick_1.default)(
       req.query,
-      faculty_constent_1.facultyFilterableFields
+      faculty_constent_1.facultyFilterableFields,
     );
     const paginationOptions = (0, pick_1.default)(
       req.query,
-      pagination_1.paginationField
+      pagination_1.paginationField,
     );
     const result = yield faculty_service_1.FacultyService.getAllFaculties(
       filters,
-      paginationOptions
+      paginationOptions,
     );
     // next();
     (0, sendResponse_1.default)(res, {
@@ -68,7 +68,7 @@ const getAllFaculties = (0, catchAsync_1.default)((req, res) =>
       meta: result.meta,
       data: result.data,
     });
-  })
+  }),
 );
 const getSingleFaculty = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -81,14 +81,13 @@ const getSingleFaculty = (0, catchAsync_1.default)((req, res) =>
       message: 'Faculty retrived Successfully',
       data: result,
     });
-  })
+  }),
 );
 const deleteSingleFaculty = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const result = yield faculty_service_1.FacultyService.deleteSingleFaculty(
-      id
-    );
+    const result =
+      yield faculty_service_1.FacultyService.deleteSingleFaculty(id);
     // next();
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -96,7 +95,7 @@ const deleteSingleFaculty = (0, catchAsync_1.default)((req, res) =>
       message: 'Faculty deleted Successfully',
       data: result,
     });
-  })
+  }),
 );
 const updateFaculty = (0, catchAsync_1.default)((req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
@@ -104,7 +103,7 @@ const updateFaculty = (0, catchAsync_1.default)((req, res) =>
     const updatedData = req.body;
     const result = yield faculty_service_1.FacultyService.updateFaculty(
       id,
-      updatedData
+      updatedData,
     );
     (0, sendResponse_1.default)(res, {
       statusCode: http_status_1.default.OK,
@@ -112,7 +111,7 @@ const updateFaculty = (0, catchAsync_1.default)((req, res) =>
       message: 'Faculty Update Successfully',
       data: result,
     });
-  })
+  }),
 );
 exports.FacultyController = {
   getAllFaculties,

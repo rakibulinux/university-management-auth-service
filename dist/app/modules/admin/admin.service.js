@@ -57,7 +57,7 @@ var __importDefault =
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.AdminService = void 0;
 const paginationHelpers_1 = __importDefault(
-  require('../../helpers/paginationHelpers')
+  require('../../helpers/paginationHelpers'),
 );
 const admin_constent_1 = require('./admin.constent');
 const admin_model_1 = require('./admin.model');
@@ -123,7 +123,7 @@ const updateAdmin = (id, payload) =>
     if (!isExsist) {
       throw new ApiError_1.default(
         http_status_1.default.NOT_FOUND,
-        'Admin Not found'
+        'Admin Not found',
       );
     }
     const { name } = payload,
@@ -140,7 +140,7 @@ const updateAdmin = (id, payload) =>
       updateAdminData,
       {
         new: true,
-      }
+      },
     );
     return result;
   });
