@@ -6,15 +6,15 @@ import { AcademicSemesterController } from './academicSemester.controller';
 const router = express.Router();
 
 router.post(
-  '/create-semester',
+  '/',
   validateRequest(AcademicSemesterValidation.createAcademicSemesterZodSchema),
-  AcademicSemesterController.createSemester
+  AcademicSemesterController.createSemester,
 );
 
 router.patch(
   '/:id',
   validateRequest(AcademicSemesterValidation.updateAcademicSemesterZodSchema),
-  AcademicSemesterController.updateSemister
+  AcademicSemesterController.updateSemister,
 );
 router.get('/:id', AcademicSemesterController.getSingleSemister);
 router.delete('/:id', AcademicSemesterController.deleteSingleSemister);

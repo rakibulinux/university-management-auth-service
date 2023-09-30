@@ -16,9 +16,12 @@ import { IFaculty } from '../faculty/faculty.interface';
 import { Faculty } from '../faculty/faculty.model';
 import { Admin } from '../admin/admin.model';
 import { IAdmin } from '../admin/admin.interface';
+import { RedisClient } from '../../../shared/redis';
+import { EVENT_STUDENT_CREATED } from '../student/student.constent';
+import { EVENT_FACULTY_CREATED } from '../faculty/faculty.constent';
 const createStudent = async (
   student: IStudent,
-  user: IUser
+  user: IUser,
 ): Promise<IUser | null> => {
   if (!user.password) {
     user.password = config.default_student_pass as string;
@@ -26,7 +29,7 @@ const createStudent = async (
   user.role = 'student';
 
   const academicSemester = await AcademicSemester.findById(
-    student.academicSemester
+    student.academicSemester,
   );
   let newUserAllData = null;
   const session = await mongoose.startSession();
@@ -77,12 +80,17 @@ const createStudent = async (
       ],
     });
   }
-
+  if (newUserAllData) {
+    await RedisClient.publish(
+      EVENT_STUDENT_CREATED,
+      JSON.stringify(newUserAllData.student),
+    );
+  }
   return newUserAllData;
 };
 const createFaculty = async (
   faculty: IFaculty,
-  user: IUser
+  user: IUser,
 ): Promise<IUser | null> => {
   if (!user.password) {
     user.password = config.default_faculty_pass as string;
@@ -134,12 +142,17 @@ const createFaculty = async (
       ],
     });
   }
-
+  if (newUserAllData) {
+    await RedisClient.publish(
+      EVENT_FACULTY_CREATED,
+      JSON.stringify(newUserAllData.faculty),
+    );
+  }
   return newUserAllData;
 };
 const createAdmin = async (
   admin: IAdmin,
-  user: IUser
+  user: IUser,
 ): Promise<IUser | null> => {
   if (!user.password) {
     user.password = config.default_admin_pass as string;

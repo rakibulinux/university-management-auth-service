@@ -6,6 +6,7 @@ import {
 } from './academicSemester.constant';
 import {
   IAcademicSemester,
+  IAcademicSemesterEvent,
   IAcademicSemesterFilters,
 } from './academicSemester.interface';
 import { AcademicSemester } from './academicSemester.model';
@@ -15,7 +16,7 @@ import calculatePagination from '../../helpers/paginationHelpers';
 import { SortOrder } from 'mongoose';
 
 const createSemister = async (
-  payload: IAcademicSemester
+  payload: IAcademicSemester,
 ): Promise<IAcademicSemester | null> => {
   if (academicSemesterTitleCodeMapper[payload.title] !== payload.code) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid Semister Code');
@@ -26,7 +27,7 @@ const createSemister = async (
 
 const getAllSemisters = async (
   filters: IAcademicSemesterFilters,
-  paginationOptions: IPaginationOptions
+  paginationOptions: IPaginationOptions,
 ): Promise<IGenericResponse<IAcademicSemester[]>> => {
   const { searchTerm, ...filtersData } = filters;
 
@@ -78,20 +79,20 @@ const getAllSemisters = async (
 };
 
 const getSingleSemister = async (
-  id: string
+  id: string,
 ): Promise<IAcademicSemester | null> => {
   const result = await AcademicSemester.findById(id);
   return result;
 };
 const deleteSingleSemister = async (
-  id: string
+  id: string,
 ): Promise<IAcademicSemester | null> => {
   const result = await AcademicSemester.findByIdAndDelete(id);
   return result;
 };
 const updateSemister = async (
   id: string,
-  payload: Partial<IAcademicSemester>
+  payload: Partial<IAcademicSemester>,
 ): Promise<IAcademicSemester | null> => {
   if (
     payload.title &&
@@ -106,10 +107,48 @@ const updateSemister = async (
   return result;
 };
 
+const createSemisterFromEvent = async (
+  event: IAcademicSemesterEvent,
+): Promise<void> => {
+  await AcademicSemester.create({
+    title: event.title,
+    year: event.year,
+    code: event.code,
+    startMonth: event.startMonth,
+    endMonth: event.endMonth,
+    syncId: event.id,
+  });
+};
+const updateSemisterFromEvent = async (
+  event: IAcademicSemesterEvent,
+): Promise<void> => {
+  await AcademicSemester.findOneAndUpdate(
+    { syncId: event.id },
+    {
+      $set: {
+        title: event.title,
+        year: event.year,
+        code: event.code,
+        startMonth: event.startMonth,
+        endMonth: event.endMonth,
+        syncId: event.id,
+      },
+    },
+  );
+};
+const deleteSemisterFromEvent = async (
+  event: IAcademicSemesterEvent,
+): Promise<void> => {
+  await AcademicSemester.findOneAndDelete({ syncId: event.id });
+};
+
 export const AcademicSemesterService = {
   createSemister,
   getAllSemisters,
   getSingleSemister,
   updateSemister,
   deleteSingleSemister,
+  createSemisterFromEvent,
+  updateSemisterFromEvent,
+  deleteSemisterFromEvent,
 };

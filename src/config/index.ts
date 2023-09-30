@@ -11,10 +11,14 @@ export default {
   default_faculty_pass: process.env.DEFAULT_FACULTY_PASS,
   default_admin_pass: process.env.DEFAULT_ADMIN_PASS,
   bcrypt_salt_rounds: process.env.BCRYPT_SALT_ROUNDS,
+  expires_in: process.env.REDIS_TOKEN_EXPIRE_IN,
   jwt: {
     secret: process.env.JWT_SECRET,
     expires_in: process.env.JWT_EXPIRES_IN,
     refresh_secret: process.env.JWT_REFRESH_SECRET,
     refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
+  },
+  redis: {
+    url: process.env.REDIS_URL,
   },
 };

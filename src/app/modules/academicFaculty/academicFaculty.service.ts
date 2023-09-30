@@ -1,5 +1,6 @@
 import {
   IAcademicFaculty,
+  IAcademicFacultyEvent,
   IAcademicFacultyFilters,
 } from './academicFaculty.interface';
 import { IPaginationOptions } from '../../../interfaces/pagination';
@@ -10,7 +11,7 @@ import { AcademicFaculty } from './academicFaculty.model';
 import { academicFacultySearchableFields } from './academicFaculty.constant';
 
 const createAcademicFaculty = async (
-  payload: IAcademicFaculty
+  payload: IAcademicFaculty,
 ): Promise<IAcademicFaculty | null> => {
   const result = await AcademicFaculty.create(payload);
   return result;
@@ -18,7 +19,7 @@ const createAcademicFaculty = async (
 
 const getAllAcademicFaculties = async (
   filters: IAcademicFacultyFilters,
-  paginationOptions: IPaginationOptions
+  paginationOptions: IPaginationOptions,
 ): Promise<IGenericResponse<IAcademicFaculty[]>> => {
   const { searchTerm, ...filtersData } = filters;
 
@@ -70,25 +71,53 @@ const getAllAcademicFaculties = async (
 };
 
 const getSingleAcademicFaculty = async (
-  id: string
+  id: string,
 ): Promise<IAcademicFaculty | null> => {
   const result = await AcademicFaculty.findById(id);
   return result;
 };
 const deleteSingleAcademicFaculty = async (
-  id: string
+  id: string,
 ): Promise<IAcademicFaculty | null> => {
   const result = await AcademicFaculty.findByIdAndDelete(id);
   return result;
 };
 const updateAcademicFaculty = async (
   id: string,
-  payload: Partial<IAcademicFaculty>
+  payload: Partial<IAcademicFaculty>,
 ): Promise<IAcademicFaculty | null> => {
   const result = await AcademicFaculty.findOneAndUpdate({ _id: id }, payload, {
     new: true,
   });
   return result;
+};
+
+const createFacultyFromEvent = async (
+  event: IAcademicFacultyEvent,
+): Promise<void> => {
+  console.log(event);
+  await AcademicFaculty.create({
+    title: event.title,
+    syncId: event.id,
+  });
+};
+const updateFacultyFromEvent = async (
+  event: IAcademicFacultyEvent,
+): Promise<void> => {
+  await AcademicFaculty.findOneAndUpdate(
+    { syncId: event.id },
+    {
+      $set: {
+        title: event.title,
+        syncId: event.id,
+      },
+    },
+  );
+};
+const deleteFacultyFromEvent = async (
+  event: IAcademicFacultyEvent,
+): Promise<void> => {
+  await AcademicFaculty.findOneAndDelete({ syncId: event.id });
 };
 
 export const AcademicFacultyService = {
@@ -97,4 +126,7 @@ export const AcademicFacultyService = {
   getSingleAcademicFaculty,
   updateAcademicFaculty,
   deleteSingleAcademicFaculty,
+  createFacultyFromEvent,
+  updateFacultyFromEvent,
+  deleteFacultyFromEvent,
 };

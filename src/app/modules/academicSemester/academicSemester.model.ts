@@ -18,13 +18,14 @@ const academicSemesterSchema = new Schema<IAcademicSemester>(
     code: { type: String, required: true, enum: academicSemesterCode },
     startMonth: { type: String, required: true, enum: academicSemesterMonth },
     endMonth: { type: String, required: true, enum: academicSemesterMonth },
+    syncId: { type: String, required: true },
   },
   {
     timestamps: true,
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 
 academicSemesterSchema.pre('save', async function (next) {
@@ -35,7 +36,7 @@ academicSemesterSchema.pre('save', async function (next) {
   if (isExsist) {
     throw new ApiError(
       httpStatus.CONFLICT,
-      'Academic Semister is already exsist'
+      'Academic Semister is already exsist',
     );
   }
 
@@ -44,7 +45,7 @@ academicSemesterSchema.pre('save', async function (next) {
 
 export const AcademicSemester = model<IAcademicSemester, AcademicSemesterModel>(
   'AcademicSemester',
-  academicSemesterSchema
+  academicSemesterSchema,
 );
 
 // Handle same year and same semister issue

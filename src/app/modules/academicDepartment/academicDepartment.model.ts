@@ -12,13 +12,14 @@ const AcademicDepartmentSchema = new Schema<IAcademicDepartment>(
       ref: 'AcademicFaculty',
       required: true,
     },
+    syncId: { type: String, required: true },
   },
   {
     timestamps: true,
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 
 export const AcademicDepartment = model<

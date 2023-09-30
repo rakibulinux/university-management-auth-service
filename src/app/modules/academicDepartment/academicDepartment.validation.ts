@@ -5,9 +5,7 @@ const createAcademicDepartmentZodSchema = z.object({
     title: z.string({
       required_error: 'Department Title Required',
     }),
-    academicFaculty: z.string({
-      required_error: 'Academic Faculty is required',
-    }),
+    academicFaculty: z.string().optional(),
   }),
 });
 const updateAcademicDepartmentZodSchema = z.object({

@@ -9,21 +9,20 @@ import config from '../../../config';
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { ...loginData } = req.body;
   const result = await AuthService.loginUser(loginData);
-  const { refreshToken, ...others } = result;
 
   const cookieOption = {
     secure: config.env === 'production',
     httpOnly: true,
   };
 
-  res.cookie('refreshToken', refreshToken, cookieOption);
+  res.cookie('refreshToken', result.refreshToken, cookieOption);
 
-  if (refreshToken)
+  if (result.refreshToken)
     sendResponse<ILoginUserResponse>(res, {
       statusCode: httpStatus.OK,
       success: true,
       message: 'User Login Successfully',
-      data: others,
+      data: result,
     });
 });
 const refreshToken = catchAsync(async (req: Request, res: Response) => {

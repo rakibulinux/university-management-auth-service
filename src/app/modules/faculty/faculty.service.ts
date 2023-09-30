@@ -4,15 +4,19 @@ import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import calculatePagination from '../../helpers/paginationHelpers';
 import { IFaculty, IFacultyFilters } from './faculty.interface';
-import { facultySearchableFields } from './faculty.constent';
+import {
+  EVENT_FACULTY_UPDATED,
+  facultySearchableFields,
+} from './faculty.constent';
 import { Faculty } from './faculty.model';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import { User } from '../user/user.model';
+import { RedisClient } from '../../../shared/redis';
 
 const getAllFaculties = async (
   filters: IFacultyFilters,
-  paginationOptions: IPaginationOptions
+  paginationOptions: IPaginationOptions,
 ): Promise<IGenericResponse<IFaculty[]>> => {
   const { searchTerm, ...filtersData } = filters;
 
@@ -72,7 +76,7 @@ const getSingleFaculty = async (id: string): Promise<IFaculty | null> => {
   if (!result) {
     throw new ApiError(
       httpStatus.NOT_FOUND,
-      'Faculty ID is wrong or No Faculty Found'
+      'Faculty ID is wrong or No Faculty Found',
     );
   }
   return result;
@@ -109,9 +113,9 @@ const deleteSingleFaculty = async (id: string): Promise<IFaculty | null> => {
 
 const updateFaculty = async (
   id: string,
-  payload: Partial<IFaculty>
+  payload: Partial<IFaculty>,
 ): Promise<IFaculty | null> => {
-  const isExsist = await Faculty.findOne({ _id: id });
+  const isExsist = await Faculty.findOne({ id });
 
   if (!isExsist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Faculty Not found');
@@ -126,13 +130,14 @@ const updateFaculty = async (
     });
   }
 
-  const result = await Faculty.findOneAndUpdate(
-    { _id: id },
-    updateFacultyData,
-    {
-      new: true,
-    }
-  );
+  const result = await Faculty.findOneAndUpdate({ id }, updateFacultyData, {
+    new: true,
+  })
+    .populate('academicFaculty')
+    .populate('academicDepartment');
+  if (result) {
+    await RedisClient.publish(EVENT_FACULTY_UPDATED, JSON.stringify(result));
+  }
   return result;
 };
 export const FacultyService = {

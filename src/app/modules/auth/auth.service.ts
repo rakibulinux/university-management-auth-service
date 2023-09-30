@@ -34,12 +34,12 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   const accessToken = jwtHelpers.createToken(
     { userId, role },
     config.jwt.secret as Secret,
-    config.jwt.expires_in as string
+    config.jwt.expires_in as string,
   );
   const refreshToken = jwtHelpers.createToken(
     { userId, role },
     config.jwt.refresh_secret as Secret,
-    config.jwt.refresh_expires_in as string
+    config.jwt.refresh_expires_in as string,
   );
 
   // const accessToken = jwt.sign(
@@ -73,7 +73,7 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
   try {
     verifiedToken = jwtHelpers.verifyToken(
       token,
-      config.jwt.refresh_secret as Secret
+      config.jwt.refresh_secret as Secret,
     );
     // verifiedToken = jwt.verify(token, config.jwt.refresh_secret as Secret);
   } catch (err) {
@@ -93,7 +93,7 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
       role: isUserExsist.role,
     },
     config.jwt.secret as Secret,
-    config.jwt.expires_in as string
+    config.jwt.expires_in as string,
   );
   return {
     accessToken: newAccessToken,
@@ -101,7 +101,7 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
 };
 const changePassword = async (
   user: JwtPayload | null,
-  payload: IChangePassword
+  payload: IChangePassword,
 ): Promise<void> =>
   // : Promise<ILoginUserResponse>
   {
@@ -112,7 +112,7 @@ const changePassword = async (
 
     // Good way
     const isUserExsist = await User.findOne({ id: user?.userId }).select(
-      '+password'
+      '+password',
     );
 
     if (!isUserExsist) {

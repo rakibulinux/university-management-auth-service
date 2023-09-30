@@ -11,18 +11,19 @@ const AcademicFacultySchema = new Schema<
 >(
   {
     title: { type: String, required: true, unique: true },
+    syncId: { type: String, required: true },
   },
   {
     timestamps: true,
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 
 export const AcademicFaculty = model<IAcademicFaculty, AcademicFacultyModel>(
   'AcademicFaculty',
-  AcademicFacultySchema
+  AcademicFacultySchema,
 );
 
 // Handle same year and same semister issue

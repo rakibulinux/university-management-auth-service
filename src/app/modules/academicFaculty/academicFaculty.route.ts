@@ -8,10 +8,10 @@ import { ENUM_USER_ROLE } from '../../../enums/user';
 const router = express.Router();
 
 router.post(
-  '/create-faculty',
+  '/',
   validateRequest(AcademicFacultyValidation.createAcademicFacultyZodSchema),
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
-  AcademicFacultyController.createAcademicFaculty
+  AcademicFacultyController.createAcademicFaculty,
 );
 
 router.patch(
@@ -20,9 +20,9 @@ router.patch(
   auth(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
-    ENUM_USER_ROLE.FACULTY
+    ENUM_USER_ROLE.FACULTY,
   ),
-  AcademicFacultyController.updateAcademicFaculty
+  AcademicFacultyController.updateAcademicFaculty,
 );
 router.get(
   '/:id',
@@ -30,14 +30,14 @@ router.get(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.FACULTY,
-    ENUM_USER_ROLE.STUDENT
+    ENUM_USER_ROLE.STUDENT,
   ),
-  AcademicFacultyController.getSingleAcademicFaculty
+  AcademicFacultyController.getSingleAcademicFaculty,
 );
 router.delete(
   '/:id',
   auth(ENUM_USER_ROLE.SUPER_ADMIN, ENUM_USER_ROLE.ADMIN),
-  AcademicFacultyController.deleteSingleAcademicFaculty
+  AcademicFacultyController.deleteSingleAcademicFaculty,
 );
 router.get(
   '/',
@@ -45,9 +45,9 @@ router.get(
     ENUM_USER_ROLE.SUPER_ADMIN,
     ENUM_USER_ROLE.ADMIN,
     ENUM_USER_ROLE.FACULTY,
-    ENUM_USER_ROLE.STUDENT
+    ENUM_USER_ROLE.STUDENT,
   ),
-  AcademicFacultyController.getAllAcademicFaculties
+  AcademicFacultyController.getAllAcademicFaculties,
 );
 
 export const AcademicFacultyRoutes = router;
