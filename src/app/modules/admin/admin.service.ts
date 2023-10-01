@@ -37,12 +37,12 @@ const getAllAdmins = async (
     });
   }
 
-  const { page, limit, skip, soryBy, sortOrder } =
+  const { page, limit, skip, sortBy, sortOrder } =
     calculatePagination(paginationOptions);
 
   const sortCondition: { [key: string]: SortOrder } = {};
-  if (soryBy && sortOrder) {
-    sortCondition[soryBy] = sortOrder;
+  if (sortBy && sortOrder) {
+    sortCondition[sortBy] = sortOrder;
   }
 
   const whereCondition = andCondition.length > 0 ? { $and: andCondition } : {};
